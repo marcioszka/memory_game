@@ -26,8 +26,27 @@ def get_difficulty_level():
     return choice.lower()
 
 
-def get_hidden_board(width, height):
+def get_shown_board(width, height):
     return [[False for _ in range(height)] for _ in range(width)]
+
+
+def draw_board(board, shown_board, coordinates = None):
+    print('  ',end='')
+    for i in range(len(board)):
+        print(f'{i+1} ', end='')
+    print()
+    for i in range(len(board[0])):
+        print(f'{alphabet[i]} ',end='')
+        for j in range(len(board)):
+            character = '#'
+            if coordinates != None:
+                if coordinates[0] == j and coordinates [1] == i:
+                    character = board[j][i]
+            if shown_board[j][i]:
+                character = board[j][i]
+            print(f'{character} ',end='')
+        print()
+
 
 
 def main():
