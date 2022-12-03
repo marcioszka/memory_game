@@ -1,4 +1,5 @@
 import os
+from random import randint
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 difficulties = {'easy': (5,4), 'medium': (5,6), "hard": (5,10)}
@@ -31,7 +32,7 @@ def get_shown_board(width, height):
 
 
 def draw_board(board, shown_board, coordinates = None):
-    print('  ',end='')
+    print('\n  ',end='')
     for i in range(len(board)):
         print(f'{alphabet[i]} ', end='')
     print()
@@ -46,12 +47,31 @@ def draw_board(board, shown_board, coordinates = None):
                 character = board[j][i]
             print(f'{character} ',end='')
         print()
-
+    print()
 
 
 def main():
-    pass
-
+    steps = 0
+    print('\nWelcome to Memory Game!',end='\n\n')
+    size = difficulties[get_difficulty_level()]
+    board = [['A','B','C','D'],['E','F','G','H'],['E','F','G','H'],['I','J','J','I'],['A','B','C','D']] # Get board
+    shown_board = get_shown_board(len(board), len(board[0]))
+    draw_board(board,shown_board)
+    end = False
+    while not end:
+        first_coords = (randint(0, len(board)-1), randint(0,len(board[0])-1)) # input
+        console_clear()
+        draw_board(board,shown_board,first_coords)
+        second_coords = (randint(0, len(board)-1), randint(0,len(board[0])-1)) # input
+        if board[first_coords[0]][first_coords[1]] == board[second_coords[0]][second_coords[1]]:
+            shown_board[first_coords[0]][first_coords[1]] = True
+            shown_board[second_coords[0]][second_coords[1]] = True
+        console_clear()
+        steps += 1
+        draw_board(board,shown_board,second_coords)
+        if False not in [cell for col in shown_board for cell in col]:
+            end = True
+    print(f'Congratulations! You\'ve finished the game in : {steps} steps.')
 
 if __name__ == "__main__":
     main()
