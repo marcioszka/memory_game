@@ -33,10 +33,10 @@ def get_shown_board(width, height):
 def draw_board(board, shown_board, coordinates = None):
     print('  ',end='')
     for i in range(len(board)):
-        print(f'{i+1} ', end='')
+        print(f'{alphabet[i]} ', end='')
     print()
     for i in range(len(board[0])):
-        print(f'{alphabet[i]} ',end='')
+        print(f'{i+1} ',end='')
         for j in range(len(board)):
             character = '#'
             if coordinates != None:
